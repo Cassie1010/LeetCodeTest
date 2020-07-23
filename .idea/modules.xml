@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Java8NewFeatures/Java8NewFeatures.iml" filepath="$PROJECT_DIR$/../Java8NewFeatures/Java8NewFeatures.iml" />
+      <module fileurl="file://$USER_HOME$/Documents/git/JavaTest/JavaTest.iml" filepath="$USER_HOME$/Documents/git/JavaTest/JavaTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/LeetCodeTest.iml" filepath="$PROJECT_DIR$/LeetCodeTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../StudyTest/StudyTest.iml" filepath="$PROJECT_DIR$/../StudyTest/StudyTest.iml" />
+    </modules>
+  </component>
+</project>
