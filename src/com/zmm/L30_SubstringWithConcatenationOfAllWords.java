@@ -3,12 +3,41 @@ package com.zmm;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.*;
 
+/**
+ * 串联所有单词的子串
+ * 给定一个字符串 s 和一些长度相同的单词 words。找出 s 中恰好可以由 words 中所有单词串联形成的子串的起始位置。
+ *
+ * 注意子串要与 words 中的单词完全匹配，中间不能有其他字符，但不需要考虑 words 中单词串联的顺序。
+ *
+ *  
+ *
+ * 示例 1：
+ *
+ * 输入：
+ *   s = "barfoothefoobarman",
+ *   words = ["foo","bar"]
+ * 输出：[0,9]
+ * 解释：
+ * 从索引 0 和 9 开始的子串分别是 "barfoo" 和 "foobar" 。
+ * 输出的顺序不重要, [9,0] 也是有效答案。
+ * 示例 2：
+ *
+ * 输入：
+ *   s = "wordgoodgoodgoodbestword",
+ *   words = ["word","good","best","word"]
+ * 输出：[]
+ *
+ * 来源：力扣（LeetCode）
+ * 链接：https://leetcode-cn.com/problems/substring-with-concatenation-of-all-words
+ * 著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+ */
 public class L30_SubstringWithConcatenationOfAllWords {
     public static void main(String[] args) {
-        List<Integer> result = new L30_SubstringWithConcatenationOfAllWords().findSubstring("barfoothefoobarman", new String[]{"foo","bar"});
-        /*List<Integer> result = new L30_SubstringWithConcatenationOfAllWords().findSubstring("ababababababababababababababababababababababababababababababa" +
+        List<Integer> result = new L30_SubstringWithConcatenationOfAllWords().findSubstring(
+                "wordgoodgoodgoodbestword",
+                        new String[]{"word","good","best","good"});
+        /*List<Integer> result = new L30_SubstringWithConcatenationOfAllWords1().findSubstring("ababababababababababababababababababababababababababababababa" +
                         "babababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababa" +
                         "babababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababa" +
                         "babababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababa" +
@@ -30,77 +59,51 @@ public class L30_SubstringWithConcatenationOfAllWords {
         */
         System.out.println(result);
     }
+
+    public void dealWords(List<String> wordList, String starWord, List<String> words, int remIndex){
+        List<String> tempList = new ArrayList<String>(words);
+        if(remIndex !=-1) tempList.remove(remIndex);
+        if(tempList.isEmpty()){
+            if(!wordList.contains(starWord) && !starWord.equals("")){
+                wordList.add(starWord);
+            }
+            return;
+        }
+        String temp = null;
+        List<String> currWord = new ArrayList<>();
+        for(int i = 0; i < tempList.size(); i++){
+            if(!currWord.contains(tempList.get(i))){
+                currWord.add(tempList.get(i));
+                temp = starWord + tempList.get(i);
+                dealWords(wordList, temp, tempList, i);
+            }
+        }
+    }
+
     public List<Integer> findSubstring(String s, String[] words) {
+
         List<Integer> result = new ArrayList<>();
         if(s == null || words == null || words.length == 0){
             return result;
         }
-        String temp = null;
-        final int cpuCore = Runtime.getRuntime().availableProcessors();
-        final int poolSize = cpuCore+1;
-        ExecutorService service = Executors.newFixedThreadPool(poolSize);
-        ArrayList<Future<Integer>> results = new ArrayList<Future<Integer>>();
-        for(int i = 0; i < s.length() - (words[0].length() * words.length - 1); i++){
-            temp = s.substring(i);
-            for(int j = 0 ; j < words.length && !results.contains(i) ; j++){
-                if(temp.startsWith(words[j]) && !results.contains(i)){
-                    results.add(service.submit(new dealCallable(temp, new ArrayList<>(Arrays.asList(words)), j, i)));
-                }
-            }
+        int size = words.length * words[0].length();
+        if(size > s.length()){
+            return result;
         }
-        if(!results.isEmpty()){
-            Integer re = null;
-            for(Future<Integer> future: results){
-                if(!future.isDone()){
-                    try {
-                        re = future.get();
-                        if(re != null && !result.contains(re)){
-                            result.add(re);
-                        }
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                try {
-                    System.out.println("get: "+future.get());
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+        List<String> wordList = new ArrayList<>();
+        dealWords(wordList, "", Arrays.asList(words), -1);
+
+        String temp = null;
+        for(int i = 0; i <= s.length() - size; i++){
+            temp = s.substring(i);
+            for(String word : wordList){
+                if(temp.startsWith(word)){
+                    result.add(i);
+                    break;
                 }
             }
         }
         return result;
     }
 
-    class dealCallable implements Callable{
-        private String subStr;
-        private List<String> tempWords;
-        private int remIndex;
-        private int oriIndex;
-
-        public dealCallable(String subStr, List<String> tempWords, int remIndex, int oriIndex) {
-            this.subStr = subStr;
-            this.tempWords = tempWords;
-            this.remIndex = remIndex;
-            this.oriIndex = oriIndex;
-        }
-
-        @Override
-        public Object call() {
-            return deal(subStr, tempWords, remIndex, oriIndex);
-        }
-    }
-
-    public Integer deal(String subStr, List<String> tempWords, int remIndex, int oriIndex){
-        tempWords.remove(remIndex);
-        if(tempWords.isEmpty()){
-            return oriIndex;
-        }
-        subStr = subStr.substring(tempWords.get(0).length());
-        for(int j = 0 ; j < tempWords.size() ; j++){
-            if(subStr.startsWith(tempWords.get(j))){
-                return deal(subStr, tempWords, j, oriIndex);
-            }
-        }
-        return null;
-    }
 }
