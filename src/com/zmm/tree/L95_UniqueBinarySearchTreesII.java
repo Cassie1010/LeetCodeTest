@@ -40,7 +40,14 @@ import java.util.List;
 public class L95_UniqueBinarySearchTreesII {
 
     public static void main(String[] args) {
-        System.out.println(new L95_UniqueBinarySearchTreesII().generateTrees(3));
+        System.out.println(new L95_UniqueBinarySearchTreesII().generateTrees(1).size());
+        System.out.println(new L95_UniqueBinarySearchTreesII().generateTrees(2).size());
+        System.out.println(new L95_UniqueBinarySearchTreesII().generateTrees(3).size());
+        System.out.println(new L95_UniqueBinarySearchTreesII().generateTrees(4).size());
+        System.out.println(new L95_UniqueBinarySearchTreesII().generateTrees(5).size());
+        System.out.println(new L95_UniqueBinarySearchTreesII().generateTrees(6).size());
+        System.out.println(new L95_UniqueBinarySearchTreesII().generateTrees(7).size());
+        System.out.println(new L95_UniqueBinarySearchTreesII().generateTrees(8).size());
     }
 
     public List<TreeNode> generateTrees(int n) {
