@@ -29,7 +29,7 @@ public class L96_UniqueBinarySearchTrees {
         G[0] = 1;
         G[1] = 1;
 
-        for (int i = 2; i <= n; ++i) {
+        for (int i = 2; i <= n; ++i) {//以i为根节点计算次数
             for (int j = 1; j <= i; ++j) {
                 G[i] += G[j - 1] * G[i - j];
             }
