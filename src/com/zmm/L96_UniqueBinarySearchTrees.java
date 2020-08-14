@@ -1,4 +1,4 @@
-package com.zmm.tree;
+package com.zmm;
 
 /**
  * 96. 不同的二叉搜索树

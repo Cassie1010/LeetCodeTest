@@ -1,6 +1,4 @@
-package com.zmm.stack;
-
-import sun.security.util.Length;
+package com.zmm;
 
 import java.util.Stack;
 

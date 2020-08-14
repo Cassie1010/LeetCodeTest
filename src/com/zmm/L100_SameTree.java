@@ -1,4 +1,4 @@
-package com.zmm.tree;
+package com.zmm;
 
 import java.util.Stack;
 
