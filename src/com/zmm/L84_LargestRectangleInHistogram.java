@@ -34,7 +34,7 @@ import java.util.Stack;
  */
 public class L84_LargestRectangleInHistogram {
     public static void main(String[] args) {
-        System.out.println(new L84_LargestRectangleInHistogram().largestRectangleArea(new int[]{2, 1, 5, 6, 2, 3}));
+        System.out.println(new L84_LargestRectangleInHistogram().largestRectangleArea(new int[]{2, 2, 2, 2, 2}));
     }
 
     //单调栈+常数优化
