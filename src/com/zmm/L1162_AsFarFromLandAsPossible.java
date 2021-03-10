@@ -68,8 +68,9 @@ public class L1162_AsFarFromLandAsPossible {
             for(int i = 0; i < 4; i++){
                 int newx = point[0] + dxy[i][0];
                 int newy = point[1] + dxy[i][1];
-                if(newx < 0 || newx >= xlength || newy < 0 || newy >= ylength || grid[newx][newy] != 0)
+                if(newx < 0 || newx >= xlength || newy < 0 || newy >= ylength || grid[newx][newy] != 0) {
                     continue;
+                }
                 hasOcean = true;
                 //为海洋的时候计数，并加入队列
                 //增加步数，因为要取海洋到达的最近的陆地，则最先入队列表示为最近，更改值不为0即标记为已处理
