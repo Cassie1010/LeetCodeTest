@@ -83,6 +83,7 @@ public class L1162_AsFarFromLandAsPossible {
         }
         return grid[point[0]][point[1]] - 1;
     }
+
     public int maxDistance1(int[][] grid) {
         int maxInstance = -1;
         List<int[]> lands = new ArrayList<>();

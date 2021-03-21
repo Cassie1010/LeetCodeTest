@@ -8,6 +8,9 @@ import java.util.Scanner;
  */
 public class duxiaoman_002_坚强的小昆虫 {
 
+    private static int res = Integer.MAX_VALUE;
+    private static boolean flag = false;
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int group = sc.nextInt();
@@ -31,21 +34,24 @@ public class duxiaoman_002_坚强的小昆虫 {
             }
             //处理完输入，进入正式逻辑
             backtrace(matrix, x, y, 0);
-            if (!flag) res = -1;
+            if (!flag) {
+                res = -1;
+            }
             System.out.println(res);
         }
     }
-
-    private static int res = Integer.MAX_VALUE;
-    private static boolean flag = false;
 
     /**
      * 回溯
      * @param matrix
      */
     public static void backtrace(char[][] matrix, int x, int y, int num){
-        if (matrix[x][y] == '#') return ;
-        if (matrix[x][y] == '*') num++;
+        if (matrix[x][y] == '#') {
+            return;
+        }
+        if (matrix[x][y] == '*') {
+            num++;
+        }
         //结束条件
         if (x == 0 || y == 0 || x == matrix.length - 1 || y == matrix[0].length - 1){
             res = Math.min(res, num);
