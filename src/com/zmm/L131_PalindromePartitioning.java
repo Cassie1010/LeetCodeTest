@@ -68,7 +68,7 @@ public class L131_PalindromePartitioning {
         }
     }
 
-    //方法二
+    //方法二 动态规划
     public List<List<String>> partition1(String s) {
         n = s.length();
         f1 = new int[n][n];

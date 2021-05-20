@@ -26,6 +26,7 @@ import java.util.Stack;
 public class L94_BinaryTreeInorderTraversal {
     public List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
+        //递归
 //        traverse(root, result);
         //迭代-使用栈
 //        TreeNode curr = root;
@@ -64,7 +65,7 @@ public class L94_BinaryTreeInorderTraversal {
     }
 
     /**
-     * 使用莫里斯遍历
+     * 使用莫里斯遍历-迭代
      * @param result
      * @param curr
      */
@@ -87,7 +88,7 @@ public class L94_BinaryTreeInorderTraversal {
     }
 
     /**
-     * 使用栈遍历
+     * 使用栈遍历-迭代
      * @param result
      * @param curr
      */

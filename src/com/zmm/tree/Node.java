@@ -1,6 +1,5 @@
 package com.zmm.tree;
 
-import com.zmm.tree.base.BaseNode;
 import com.zmm.tree.base.BaseNodeInterface;
 
 /**
