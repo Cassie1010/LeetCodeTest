@@ -39,30 +39,41 @@ public class L103_BinaryTreeZigzagLevelOrderTraversal {
     }
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
-        if(root == null)
+        if(root == null) {
             return result;
+        }
         Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
         traverse(stack, result, true);
         return result;
     }
 
+    /**
+     * 递归
+     * @param stack
+     * @param result
+     * @param isLeftFirst
+     */
     public void traverse(Stack<TreeNode> stack, List<List<Integer>> result, boolean isLeftFirst){
         Stack<TreeNode> next = new Stack<>();
         List<Integer> data = new ArrayList<>();
         while (!stack.isEmpty()){
             TreeNode node = stack.pop();
             data.add(node.val);
-            if(isLeftFirst && node.left != null)
+            if(isLeftFirst && node.left != null) {
                 next.push(node.left);
-            if(node.right != null)
+            }
+            if(node.right != null) {
                 next.push(node.right);
-            if(!isLeftFirst && node.left != null)
+            }
+            if(!isLeftFirst && node.left != null) {
                 next.push(node.left);
+            }
         }
         result.add(data);
-        if(!next.isEmpty())
+        if(!next.isEmpty()) {
             traverse(next, result, !isLeftFirst);
+        }
     }
 
     //BFS（广度优先遍历）：逐层遍历树
@@ -85,23 +96,28 @@ public class L103_BinaryTreeZigzagLevelOrderTraversal {
         while (node_queue.size() > 0) {
             TreeNode curr_node = node_queue.pollFirst();
             if (curr_node != null) {
-                if (is_order_left)
+                if (is_order_left) {
                     level_list.addLast(curr_node.val);
-                else
+                }
+                else {
                     level_list.addFirst(curr_node.val);
+                }
 
-                if (curr_node.left != null)
+                if (curr_node.left != null) {
                     node_queue.addLast(curr_node.left);
-                if (curr_node.right != null)
+                }
+                if (curr_node.right != null) {
                     node_queue.addLast(curr_node.right);
+                }
 
             } else {
                 // we finish the scan of one level
                 results.add(level_list);
                 level_list = new LinkedList<Integer>();
                 // prepare for the next level
-                if (node_queue.size() > 0)
+                if (node_queue.size() > 0) {
                     node_queue.addLast(null);
+                }
                 is_order_left = !is_order_left;
             }
         }
@@ -115,14 +131,20 @@ public class L103_BinaryTreeZigzagLevelOrderTraversal {
             newLevel.add(node.val);
             results.add(newLevel);
         } else {
-            if (level % 2 == 0)
+            if (level % 2 == 0) {
                 results.get(level).add(node.val);
-            else
+            }
+            else {
                 results.get(level).add(0, node.val);
+            }
         }
 
-        if (node.left != null) DFS(node.left, level + 1, results);
-        if (node.right != null) DFS(node.right, level + 1, results);
+        if (node.left != null) {
+            DFS(node.left, level + 1, results);
+        }
+        if (node.right != null) {
+            DFS(node.right, level + 1, results);
+        }
     }
 
     public List<List<Integer>> zigzagLevelOrder2(TreeNode root) {

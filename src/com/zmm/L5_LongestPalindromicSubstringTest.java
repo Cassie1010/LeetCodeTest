@@ -20,7 +20,21 @@ public class L5_LongestPalindromicSubstringTest {
 	public static void main(String[] args) {
 		System.out.println(new L5_LongestPalindromicSubstringTest().longestPalindrome("cbbd"));
 	}
-	
+
+	/**
+	 * 分奇数情况和偶数情况，以当前为中间左边的第一个点
+	 * @param s
+	 * @return
+	 */
+    public String longestPalindrome1(String s) {
+    	int[] arr = new int[s.length()];
+    	String result = "";
+    	for(int i = 0; i < s.length(); i++){
+    		int maxLen = 1;
+
+		}
+		return result;
+	}
     public String longestPalindrome(String s) {
     	if(s == null || "".equals(s)) {
     		return "";
@@ -52,7 +66,9 @@ public class L5_LongestPalindromicSubstringTest {
 					}
 				}
 				result = result.length() > temp.length() ? result : temp;
-				if(!b) break;
+				if(!b) {
+					break;
+				}
 			}
 		}
         return result;

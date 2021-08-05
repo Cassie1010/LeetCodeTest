@@ -37,6 +37,10 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class L218_theSkylineProblem {
     public static void main(String[] args) {
+        new L218_theSkylineProblem().getSkyline1(new int[][]{
+                {1,2,3,4,5,6},
+                {3,4,5,6,7,8}
+        });
     }
 
     public List<List<Integer>> getSkyline(int[][] buildings) {
@@ -101,8 +105,9 @@ public class L218_theSkylineProblem {
             queue.offer(new Integer[]{temp[0], temp[1]});
             queue.offer(new Integer[]{temp[2], temp[1]});
         }
-        Integer[][] elements = new Integer[queue.size()][2];
-        queue.toArray(elements);
+//        Integer[][] elements = new Integer[queue.size()][2];
+//        queue.toArray(elements);
+        Integer[][] elements = queue.toArray(new Integer[0][0]);
 
         List<Integer> last = Arrays.asList(elements[0]);
         result.add(last);
